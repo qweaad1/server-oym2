@@ -15,14 +15,16 @@ namespace oymAPI
 
         public static string getExecute(string json)
         {
+
             using JsonDocument doc = JsonDocument.Parse(json);
             JsonElement root = doc.RootElement;
             string execute = homeinteraction;
-            foreach (JsonProperty state in root.GetProperty("ailments").EnumerateObject())
+            foreach (JsonProperty PetAilments in root.GetProperty("ailments").EnumerateObject())
             {
-                foreach (JsonProperty state2 in root.GetProperty("ailments").GetProperty(state.Name).EnumerateObject())
+
+                foreach (JsonProperty state2 in root.GetProperty("ailments").GetProperty(PetAilments.Name).EnumerateObject())
                 {
-                    Console.WriteLine("print(\"" + state2.Name + "\")");
+                  //  Console.WriteLine("print(\"" + state2.Name + "\")");
                     if (state2.Name == "sleepy")
                     {
                         execute += "ineraction(Sleepy(),\"UseBlock\") wait(20)";
@@ -45,11 +47,11 @@ namespace oymAPI
                     }
                     if (state2.Name == "play")
                     {
-                        execute += "game:GetService(\"ReplicatedStorage\").API[\"PetObjectAPI/CreatePetObject\"]:InvokeServer(table.unpack({\r\n    [1] = \"__Enum_PetObjectCreatorType_1\",\r\n    [2] = {\r\n        [\"reaction_name\"] = \"ThrowToyReaction\",\r\n        [\"unique_id\"] = \"2_0434ba72fb4e43aea773308ae2b7b065\",\r\n    },\r\n}))";
+                        execute += " for i = 1, 3 do game:GetService(\"ReplicatedStorage\").API[\"PetObjectAPI/CreatePetObject\"]:InvokeServer(table.unpack({\r\n    [1] = \"__Enum_PetObjectCreatorType_1\",\r\n    [2] = {\r\n        [\"reaction_name\"] = \"ThrowToyReaction\",\r\n        [\"unique_id\"] = \"2_0434ba72fb4e43aea773308ae2b7b065\",\r\n    },\r\n})) wait(4)\r\nend";
                     }
                     if (state2.Name == "pet_me")
                     {
-                        execute += "\r\n wait(10) game:GetService(\"ReplicatedStorage\").API[\"PetAPI/ReplicateActivePerformances\"]:FireServer(table.unpack({\r\n    [1] = workspace.Pets.Kakapo,\r\n    [2] = {\r\n        [\"FocusPet\"] = true,\r\n    },\r\n}))\r\ngame:GetService(\"ReplicatedStorage\").API[\"PetAPI/PetPetted\"]:FireServer(table.unpack({\r\n    [1] = \"2_ac0c90d4eb7e40d8a8ad1545db0aa301\",\r\n    [2] = game:GetService(\"Players\").LocalPlayer,\r\n})) \r\ngame:GetService(\"ReplicatedStorage\").API[\"AilmentsAPI/ProgressPetMeAilment\"]:FireServer(\"2_ac0c90d4eb7e40d8a8ad1545db0aa301\")\r\n   print(\"triggered\") wait(20)";
+                        execute += "\r\n wait(10) game:GetService(\"ReplicatedStorage\").API[\"PetAPI/ReplicateActivePerformances\"]:FireServer(table.unpack({\r\n    [1] = workspace.Pets.Kakapo,\r\n    [2] = {\r\n        [\"FocusPet\"] = true,\r\n    },\r\n}))\r\ngame:GetService(\"ReplicatedStorage\").API[\"PetAPI/PetPetted\"]:FireServer(table.unpack({\r\n    [1] = \"2_ac0c90d4eb7e40d8a8ad1545db0aa301\",\r\n    [2] = game:GetService(\"Players\").LocalPlayer,\r\n})) \r\ngame:GetService(\"ReplicatedStorage\").API[\"AilmentsAPI/ProgressPetMeAilment\"]:FireServer(\"2_ac0c90d4eb7e40d8a8ad1545db0aa301\")\r\n  wait(2) game:GetService(\"ReplicatedStorage\").API[\"PetAPI/ReplicateActivePerformances\"]:FireServer(table.unpack({\r\n    [1] = workspace.Pets.Kakapo,\r\n    [2] = {\r\n        [\"FocusPet\"] = true,\r\n    },\r\n}))\r\ngame:GetService(\"ReplicatedStorage\").API[\"PetAPI/PetPetted\"]:FireServer(table.unpack({\r\n    [1] = \"2_ac0c90d4eb7e40d8a8ad1545db0aa301\",\r\n    [2] = game:GetService(\"Players\").LocalPlayer,\r\n})) \r\ngame:GetService(\"ReplicatedStorage\").API[\"AilmentsAPI/ProgressPetMeAilment\"]:FireServer(\"2_ac0c90d4eb7e40d8a8ad1545db0aa301\")\r\n  print(\"triggered\") wait(20)";
                     }
                 }
             }

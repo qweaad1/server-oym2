@@ -13,6 +13,9 @@ internal class Program
         {
             string input = args[0];
             input = input.Replace(" ", "\"");
+            string path = "C:\\AD\\OSPanel\\home\\example.local\\note2.txt";
+            using StreamWriter writer = new StreamWriter(path, append: false);
+            writer.WriteLineAsync(input);
             int firstOpen = input.IndexOf('{');
             int lastClose = input.LastIndexOf('}');
             string json = "";
