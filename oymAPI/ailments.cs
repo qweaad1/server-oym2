@@ -26,7 +26,7 @@ namespace oymAPI
                    // execute += $"game:GetService(\"ReplicatedStorage\").API[\"IdleProgressionAPI/CommitAllProgression\"]:FireServer(true)";
                     foreach (JsonProperty state2 in root.GetProperty("ailments").GetProperty(PetAilments.Name).EnumerateObject())
                     {
-                        //  Console.WriteLine("print(\"" + state2.Name + "\")");
+                      //Console.WriteLine("print(\"" + state2.Name + "\")");
 
                         if (state2.Name == "sleepy")
                         {
@@ -48,12 +48,16 @@ namespace oymAPI
                         {
                             execute += "ineraction(Toilet(),\"Seat1\") wait(20)\r\n";
                         }
+                       
 
 
-                        
                         if (state2.Name == "play")
                         {
                             execute += finditem + " \r\n  for i = 1, 4 do\r\n     print(GETQuestItem(\"bone\"))\r\n      game:GetService(\"ReplicatedStorage\").API[\"PetObjectAPI/CreatePetObject\"]:InvokeServer(table.unpack({\r\n    [1] = \"__Enum_PetObjectCreatorType_1\",\r\n    [2] = {\r\n        [\"reaction_name\"] = \"ThrowToyReaction\",\r\n        [\"unique_id\"] = GETQuestItem(\"bone\"),\r\n    },\r\n}))\r\n wait(5)\r\nend";
+                        }
+                        if (state2.Name == "sick")
+                        {
+                            execute += finditem + "\r\ngame:GetService(\"ReplicatedStorage\").API[\"ShopAPI/BuyItem\"]:InvokeServer(table.unpack({\r\n    [1] = \"food\",\r\n    [2] = \"healing_apple\",\r\n    [3] = {\r\n        [\"buy_count\"] = 1,\r\n    },\r\n})) game:GetService(\"ReplicatedStorage\").API[\"PetObjectAPI/CreatePetObject\"]:InvokeServer(table.unpack({\r\n    [1] = \"__Enum_PetObjectCreatorType_2\",\r\n    [2] = {\r\n        [\"pet_unique\"] = \""+petID+ "\",\r\n        [\"additional_consume_uniques\"] = {\r\n        },\r\n        [\"unique_id\"] =  GETQuestItem(\"healing_apple\"),\r\n    },\r\n}))";
                         }
                         if (state2.Name == "pet_me")
                         {
