@@ -1,8 +1,8 @@
-﻿
-using oymAPI;
+﻿using oymAPI;
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 internal class Program
 {
@@ -12,7 +12,9 @@ internal class Program
         try
         {
             string input = args[0];
-            input = input.Replace(" ", "\"");
+
+         
+            Match petId = Regex.Match(input, @"vID=<(\S+)>");
             string path = "C:\\AD\\OSPanel\\home\\example.local\\note2.txt";
             using StreamWriter writer = new StreamWriter(path, append: false);
             writer.WriteLineAsync(input);
@@ -23,7 +25,7 @@ internal class Program
             {
                 json += input[i];
             }
-            Console.WriteLine(ailments.getExecute(json) + "\r\n wait(60) loadstring(game:HttpGet(\"http://192.168.3.4/loader.txt\"))()");
+            Console.WriteLine(ailments.getExecute(json.Replace(" ", "\""), petId.Groups[1].Value) + "\r\n wait(60) loadstring(game:HttpGet(\"http://192.168.3.4/loader.txt\"))()");
             
         }
         catch (Exception value)
