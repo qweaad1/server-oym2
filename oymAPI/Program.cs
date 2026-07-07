@@ -26,7 +26,9 @@ internal class Program
             {
                 json += input[i];
             }
-          Console.WriteLine(ailments.getExecute(json.Replace(" ", "\""), petId.Groups[1].Value) + "\r\n wait(60) loadstring(game:HttpGet(\"http://192.168.3.4/loader.txt\"))()");
+           string summerEvent = "for i = 1, 4  do \r\ngame:GetService(\"ReplicatedStorage\").adoptme_new_net[\"adoptme_legacy_shared.ContentPacks.Summer2026.Game.BuriedTreasure.BuriedTreasureNet:23\"]:InvokeServer()\r\nwait(3)\r\ngame:GetService(\"ReplicatedStorage\").adoptme_new_net[\"adoptme_legacy_shared.ContentPacks.Summer2026.Game.BuriedTreasure.BuriedTreasureNet:6\"]:InvokeServer()\r\nend";
+            summerEvent = "";
+          Console.WriteLine(ailments.getExecute(json.Replace(" ", "\""), petId.Groups[1].Value) + "\r\n wait(60) \r\n"+ summerEvent + "\r\n loadstring(game:HttpGet(\"http://192.168.3.4/loader.txt\"))()");
             
         }
         catch (Exception value)

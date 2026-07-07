@@ -19,7 +19,7 @@ namespace oymAPI
             string refresh = "local TARGET_PET =\""+petID+"\" local refresh  = function()\r\n\r\n    game:GetService(\"ReplicatedStorage\").API[\"ToolAPI/Unequip\"]:InvokeServer(table.unpack({\r\n    [1] = \"\"..TARGET_PET,\r\n    [2] = {\r\n        [\"use_sound_delay\"] = true,\r\n        [\"equip_as_last\"] = false,\r\n    },\r\n}))\r\n  wait(0.5)\r\n     game:GetService(\"ReplicatedStorage\").API[\"ToolAPI/Equip\"]:InvokeServer(table.unpack({\r\n    [1] = \"\"..TARGET_PET,\r\n    [2] = {\r\n        [\"use_sound_delay\"] = true,\r\n        [\"equip_as_last\"] = false,\r\n    },\r\n}))\r\nend\r\nrefresh()";
             using JsonDocument doc = JsonDocument.Parse(json);
             JsonElement root = doc.RootElement;
-            string execute = "\r\nlocal blueprint = workspace:FindFirstChild(\"HouseInteriors\")\r\nif blueprint then\r\n    blueprint = blueprint:FindFirstChild(\"blueprint\")\r\nend\r\n\r\nif blueprint and #blueprint:GetChildren() > 0 then\r\n    \r\nelse\r\n   game:GetService(\"ReplicatedStorage\").API[\"TeamAPI/Spawn\"]:InvokeServer()\r\n   wait(3)\r\nend\r\n" +" \r\nwait(2)\r\n" + $"Wait(1) {refresh}\r\n" + homeinteraction;// +"\r\n"+finditem;
+            string execute = "\r\nlocal blueprint = workspace:FindFirstChild(\"HouseInteriors\")\r\nif blueprint then\r\n    blueprint = blueprint:FindFirstChild(\"blueprint\")\r\nend\r\n\r\nif blueprint and #blueprint:GetChildren() > 0 then\r\n    \r\nelse\r\n   game:GetService(\"ReplicatedStorage\").API[\"TeamAPI/Spawn\"]:InvokeServer()\r\n   wait(8)\r\nend\r\n" +" \r\nwait(2)\r\n" + $"Wait(1) {refresh}\r\n" + homeinteraction;// +"\r\n"+finditem;
             foreach (JsonProperty PetAilments in root.GetProperty("ailments").EnumerateObject())
             {
                 if (PetAilments.Name == petID)
@@ -49,27 +49,32 @@ namespace oymAPI
                                 break;
                             //home
                             case "play":
-                                execute += " \r\n for i = 1, 4  do \r\n game:GetService(\"ReplicatedStorage\").API[\"PetObjectAPI/CreatePetObject\"]:InvokeServer(table.unpack({\r\n    [1] = \"__Enum_PetObjectCreatorType_1\",\r\n    [2] = {\r\n        [\"reaction_name\"] = \"ThrowToyReaction\",\r\n        [\"unique_id\"] = GETQuestItem(\"bone\"),\r\n    },\r\n}))\r\n wait(5)\r\nend";
+                                execute += " \r\n for i = 1, 4  do \r\n game:GetService(\"ReplicatedStorage\").API[\"PetObjectAPI/CreatePetObject\"]:InvokeServer(table.unpack({\r\n    [1] = \"__Enum_PetObjectCreatorType_1\",\r\n    [2] = {\r\n        [\"reaction_name\"] = \"ThrowToyReaction\",\r\n        [\"unique_id\"] = GETQuestItem(\"bone\"),\r\n    },\r\n}))\r\n wait(5)\r\nend\r\n";
                                 break;
 
                             case "sick":
-                                execute += "\r\ngame:GetService(\"ReplicatedStorage\").API[\"ShopAPI/BuyItem\"]:InvokeServer(table.unpack({\r\n    [1] = \"food\",\r\n    [2] = \"healing_apple\",\r\n    [3] = {\r\n        [\"buy_count\"] = 1,\r\n    },\r\n})) game:GetService(\"ReplicatedStorage\").API[\"PetObjectAPI/CreatePetObject\"]:InvokeServer(table.unpack({\r\n    [1] = \"__Enum_PetObjectCreatorType_2\",\r\n    [2] = {\r\n        [\"pet_unique\"] = \"" + petID + "\",\r\n        [\"additional_consume_uniques\"] = {\r\n        },\r\n        [\"unique_id\"] =  GETQuestItem(\"healing_apple\"),\r\n    },\r\n}))";
+                                execute += "\r\ngame:GetService(\"ReplicatedStorage\").API[\"ShopAPI/BuyItem\"]:InvokeServer(table.unpack({\r\n    [1] = \"food\",\r\n    [2] = \"healing_apple\",\r\n    [3] = {\r\n        [\"buy_count\"] = 1,\r\n    },\r\n})) game:GetService(\"ReplicatedStorage\").API[\"PetObjectAPI/CreatePetObject\"]:InvokeServer(table.unpack({\r\n    [1] = \"__Enum_PetObjectCreatorType_2\",\r\n    [2] = {\r\n        [\"pet_unique\"] = \"" + petID + "\",\r\n        [\"additional_consume_uniques\"] = {\r\n        },\r\n        [\"unique_id\"] =  GETQuestItem(\"healing_apple\"),\r\n    },\r\n}))\r\n";
                                 break;
                             case "pet_me":
-                                execute += "\r\n wait(10) game:GetService(\"ReplicatedStorage\").API[\"PetAPI/ReplicateActivePerformances\"]:FireServer(table.unpack({\r\n    workspace.Pets:GetChildren()[1],\r\n    [2] = {\r\n        [\"FocusPet\"] = true,\r\n    },\r\n}))\r\ngame:GetService(\"ReplicatedStorage\").API[\"PetAPI/PetPetted\"]:FireServer(table.unpack({\r\n    [1] = \"" + petID + "\",\r\n    [2] = game:GetService(\"Players\").LocalPlayer,\r\n})) \r\ngame:GetService(\"ReplicatedStorage\").API[\"AilmentsAPI/ProgressPetMeAilment\"]:FireServer(\"" + petID + "\")\r\n  wait(2) game:GetService(\"ReplicatedStorage\").API[\"PetAPI/ReplicateActivePerformances\"]:FireServer(table.unpack({\r\n    workspace.Pets:GetChildren()[1],\r\n    [2] = {\r\n        [\"FocusPet\"] = true,\r\n    },\r\n}))\r\ngame:GetService(\"ReplicatedStorage\").API[\"PetAPI/PetPetted\"]:FireServer(table.unpack({\r\n    [1] = \"" + petID + "\",\r\n    [2] = game:GetService(\"Players\").LocalPlayer,\r\n})) \r\ngame:GetService(\"ReplicatedStorage\").API[\"AilmentsAPI/ProgressPetMeAilment\"]:FireServer(\"" + petID + "\")\r\n  print(\"triggered\") wait(20)";
+                                execute += "\r\n wait(10) game:GetService(\"ReplicatedStorage\").API[\"PetAPI/ReplicateActivePerformances\"]:FireServer(table.unpack({\r\n    workspace.Pets:GetChildren()[1],\r\n    [2] = {\r\n        [\"FocusPet\"] = true,\r\n    },\r\n}))\r\ngame:GetService(\"ReplicatedStorage\").API[\"PetAPI/PetPetted\"]:FireServer(table.unpack({\r\n    [1] = \"" + petID + "\",\r\n    [2] = game:GetService(\"Players\").LocalPlayer,\r\n})) \r\ngame:GetService(\"ReplicatedStorage\").API[\"AilmentsAPI/ProgressPetMeAilment\"]:FireServer(\"" + petID + "\")\r\n  wait(2) game:GetService(\"ReplicatedStorage\").API[\"PetAPI/ReplicateActivePerformances\"]:FireServer(table.unpack({\r\n    workspace.Pets:GetChildren()[1],\r\n    [2] = {\r\n        [\"FocusPet\"] = true,\r\n    },\r\n}))\r\ngame:GetService(\"ReplicatedStorage\").API[\"PetAPI/PetPetted\"]:FireServer(table.unpack({\r\n    [1] = \"" + petID + "\",\r\n    [2] = game:GetService(\"Players\").LocalPlayer,\r\n})) \r\ngame:GetService(\"ReplicatedStorage\").API[\"AilmentsAPI/ProgressPetMeAilment\"]:FireServer(\"" + petID + "\")\r\n  print(\"triggered\") wait(20)\r\n";
                                 break;
                             case "mystery":
-                                execute += "\r\ngame:GetService(\"ReplicatedStorage\").API[\"AilmentsAPI/ChooseMysteryAilment\"]:FireServer(table.unpack({\r\n    [1] = \"" + petID + "\",\r\n    [2] = \"mystery\",\r\n    [3] = 2,\r\n    [4] = \"toilet\",\r\n}))";
+                                execute += "\r\ngame:GetService(\"ReplicatedStorage\").API[\"AilmentsAPI/ChooseMysteryAilment\"]:FireServer(table.unpack({\r\n    [1] = \"" + petID + "\",\r\n    [2] = \"mystery\",\r\n    [3] = 2,\r\n    [4] = \"toilet\",\r\n}))\r\n";
                                 break;
                             
                                 
                                 //external
 
-                            case "school":
-                                execute += external + $"\r\n School() Wait(7) {refresh} Wait(53)";
-                                break;
-                            
-                             //external
+                            //case "school":
+                            //    execute += external + $"\r\n School() Wait(7) {refresh} Wait(53)";
+                            //    break;
+                            //case "beach_party":
+                            //    execute += external + $"\r\n mainMapP() Wait(7) {refresh} Wait(53)";
+                            //    break;
+                            //case "pizza_party":
+                            //    execute += external + $"\r\n PizzaShop() Wait(7) {refresh} Wait(53)";
+                            //    break;
+                            //external
 
                             default:
                                 Console.WriteLine("print(\"obscure: " + state2.Name + "\")");
