@@ -15,6 +15,7 @@ namespace oymAPI
 
             try
             {
+
                 string json = $"{{\"obj\":[ {jsonr}]}}";
                 string path = "C:\\AD\\OSPanel\\home\\example.local\\note4.txt";
                 using StreamWriter writer = new StreamWriter(path, append: false);
