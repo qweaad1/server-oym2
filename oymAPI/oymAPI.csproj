@@ -8,4 +8,8 @@
     <BaseOutputPath>C:\AD\OSPanel\home\example.local\api</BaseOutputPath>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="9.7.0" />
+  </ItemGroup>
+
 </Project>
